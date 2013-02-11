@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>test</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <script type="text/javascript" src="jq-plugin-tap.js"></script>
+  <style type="text/css">
+    .tap-click {
+      background: red;
+      width: 100px;
+      height: 100px;
+
+      float: left;
+    }
+
+    .longtap-dblclick {
+      background: green;
+      width: 100px;
+      height: 100px;
+
+      margin-left: 10px;
+
+      float: left;
+    }
+
+    .drag {
+      background: blue;
+      width: 100px;
+      height: 100px;
+
+      position: absolute;
+      left: 220px;
+      top: 10px;
+
+      margin-left: 10px;
+
+      float: left;
+    }
+  </style>
+</head>
+<body>
+  <div class="tap-click">Tap or click me </div>
+  <div class="longtap-dblclick">Long tap or double click me </div>
+  <div class="drag">Drag me. - Mobile Only</div>
+
+  <script type="text/javascript">
+    'use strict';
+
+    $('.tap-click').addEvt('tap', function (evt) {
+      console.log('anyad');
+      $(this).append( $('<span>:)</span>') );
+    });
+
+    $('.longtap-dblclick').addEvt('longTap', function (evt) {
+      $(this).append( $('<span>:]</span>') );
+    });
+
+    var prevPageX, prevPageY;
+    $('.drag').addEvt('drag', function (evt) {
+      console.log('Drag');
+      var pageX = evt.originalEvent.changedTouches[0].pageX,
+          pageY = evt.originalEvent.changedTouches[0].pageY;
+
+      if ( typeof prevPageY === 'undefined' ) prevPageY = pageY;
+      if ( typeof prevPageX === 'undefined' ) prevPageX = pageX;
+
+      var diffLeft = prevPageX - pageX;
+      var diffTop = prevPageY - pageY;
+
+      $(this).css({
+        'top': '-='+diffTop,
+        'left': '-='+diffLeft
+      });
+
+      prevPageX = pageX;
+      prevPageY = pageY;
+    });
+
+  </script>
+</body>
+</html>
