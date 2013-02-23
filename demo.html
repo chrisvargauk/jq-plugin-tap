@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>test</title>
+  <title>Demo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
@@ -43,39 +43,27 @@
 <body>
   <div class="tap-click">Tap or click me </div>
   <div class="longtap-dblclick">Long tap or double click me </div>
-  <div class="drag">Drag me. - Mobile Only</div>
+  <div class="drag">Drag me.</div>
 
   <script type="text/javascript">
     'use strict';
 
-    $('.tap-click').addEvt('tap', function (evt) {
-      console.log('anyad');
-      $(this).append( $('<span>:)</span>') );
-    });
-
-    $('.longtap-dblclick').addEvt('longTap', function (evt) {
-      $(this).append( $('<span>:]</span>') );
-    });
-
-    var prevPageX, prevPageY;
-    $('.drag').addEvt('drag', function (evt) {
-      console.log('Drag');
-      var pageX = evt.originalEvent.changedTouches[0].pageX,
-          pageY = evt.originalEvent.changedTouches[0].pageY;
-
-      if ( typeof prevPageY === 'undefined' ) prevPageY = pageY;
-      if ( typeof prevPageX === 'undefined' ) prevPageX = pageX;
-
-      var diffLeft = prevPageX - pageX;
-      var diffTop = prevPageY - pageY;
-
-      $(this).css({
-        'top': '-='+diffTop,
-        'left': '-='+diffLeft
+    $(function () {
+      $('.tap-click').addEvt('tap', function (evt) {
+        $(this).append( $('<span>:)</span>') );
       });
 
-      prevPageX = pageX;
-      prevPageY = pageY;
+      $('.longtap-dblclick').addEvt('longTap', function (evt) {
+        $(this).append( $('<span>:]</span>') );
+      });
+
+      $('.drag').addEvt('drag', function (evt) {
+        $(this).css({
+          'top': '+='+evt.target.Tap.DragDetails.yDiff,
+          'left': '+='+evt.target.Tap.DragDetails.xDiff
+        });
+      });
+
     });
   </script>
 </body>

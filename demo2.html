@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>test</title>
+  <title>Demo 2</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
@@ -92,19 +92,8 @@
         $('.selected-long-tap').text( $(this).text() );
       });
 
-      var prevPageY;
       $('.container').addEvt('drag', function (evt) {
-        var pageY = evt.originalEvent.changedTouches[0].pageY;
-        if ( typeof prevPageY === 'undefined' ) prevPageY = pageY;
-        var diff = prevPageY - pageY;
-        $(this).find('ul').css('margin-top', '-='+diff);
-        prevPageY = pageY;
-      });
-
-      $('.container').addEvt('release', function (evt) {
-        prevPageY = undefined;
-      }).find('li').addEvt('release', function (evt) {
-        prevPageY = undefined;
+        $(this).find('ul').css('margin-top', '+='+this.Tap.DragDetails.yDiff);
       });
     }(jQuery));
 
