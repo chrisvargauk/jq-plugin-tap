@@ -51,7 +51,9 @@
           x: evt.originalEvent.changedTouches[0].pageX,
           y: evt.originalEvent.changedTouches[0].pageY,
           xPrev: evt.originalEvent.changedTouches[0].pageX,
-          yPrev: evt.originalEvent.changedTouches[0].pageY
+          yPrev: evt.originalEvent.changedTouches[0].pageY,
+          xDiff: 0,
+          yDiff: 0
         };
       } else {
         this.Tap.DragDetails.xDiff = evt.originalEvent.changedTouches[0].pageX - this.Tap.DragDetails.xPrev;
@@ -121,7 +123,9 @@
           x: evt.pageX,
           y: evt.pageY,
           xPrev: evt.pageX,
-          yPrev: evt.pageY
+          yPrev: evt.pageY,
+          xDiff: 0,
+          yDiff: 0
         };
       } else {
         // Deal with a bug - tudo: decribe bug
